@@ -30,7 +30,7 @@ source $HOME/venv37/bin/activate
 #### Install numpy/pytorch/opencv
 ```
 pip install numpy
-pip install torch==0.4.1.post2 -f https://download.pytorch.org/whl/cu90/stable # CUDA 9.0 build
+pip install torch==0.4.1.post2
 pip install opencv-python
 ```
 
