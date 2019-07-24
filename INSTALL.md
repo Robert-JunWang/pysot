@@ -14,6 +14,10 @@ This document contains detailed instructions for installing dependencies for PyS
 
 ## Step-by-step instructions
 
+#### Compile Python3.7
+
+https://tecadmin.net/install-python-3-7-on-ubuntu-linuxmint/
+
 #### Create environment and activate
 ```bash
 conda create --name pysot python=3.7
