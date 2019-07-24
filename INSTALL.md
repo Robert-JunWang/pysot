@@ -14,20 +14,23 @@ This document contains detailed instructions for installing dependencies for PyS
 
 ## Step-by-step instructions
 
-#### Compile Python3.7
+####  Compile Python3.7
 
 https://tecadmin.net/install-python-3-7-on-ubuntu-linuxmint/
 
-#### Create environment and activate
-```bash
-conda create --name pysot python=3.7
-conda activate pysot
+####  Create a virtual environment
+
+```
+virtualenv --system-site-packages -p python3.7 $HOME/venv37
+source $HOME/venv37/bin/activate
+
+
 ```
 
 #### Install numpy/pytorch/opencv
 ```
-conda install numpy
-conda install pytorch=0.4.1 torchvision cuda90 -c pytorch
+pip install numpy
+pip install torch==0.4.1.post2 -f https://download.pytorch.org/whl/cu90/stable # CUDA 9.0 build
 pip install opencv-python
 ```
 
