@@ -3,7 +3,7 @@
 This document contains detailed instructions for installing dependencies for PySOT. We recommand using the [install.sh](install.sh). The code is tested on an Ubuntu 16.04 system with Nvidia GPU (We recommand 1080TI / TITAN XP).
 
 ### Requirments
-* Conda with Python 3.7.
+* Python 3.7.
 * Nvidia GPU.
 * PyTorch 0.4.1
 * yacs
@@ -37,6 +37,8 @@ pip install opencv-python
 #### Install other requirements
 ```
 pip install pyyaml yacs tqdm colorama matplotlib cython tensorboardX
+CC="cc -mavx2" pip install -U --force-reinstall pillow-simd
+
 ```
 
 #### Build extensions
@@ -44,8 +46,3 @@ pip install pyyaml yacs tqdm colorama matplotlib cython tensorboardX
 python setup.py build_ext --inplace
 ```
 
-
-## Try with scripts
-```
-bash install.sh /path/to/your/conda pysot
-```
