@@ -84,7 +84,7 @@ def main(instanc_size=511, num_threads=12):
 
     for dataType in ['val2017', 'train2017']:
         set_crop_base_path = join(crop_path, dataType)
-        set_img_base_path = join(dataDir, dataType)
+        set_img_base_path = join('./images', dataType)
 
         annFile = '{}/annotations/instances_{}.json'.format(dataDir,dataType)
         coco = COCO(annFile)

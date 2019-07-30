@@ -273,7 +273,7 @@ def main():
         logger.info("config \n{}".format(json.dumps(cfg, indent=4)))
 
     # create model
-    model = ModelBuilder().cuda().train()
+    model = ModelBuilder(cfg).cuda().train()
     dist_model = DistModule(model)
 
     # load pretrained backbone weights

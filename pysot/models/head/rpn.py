@@ -75,8 +75,12 @@ class DepthwiseXCorr(nn.Module):
     def forward(self, kernel, search):
         kernel = self.conv_kernel(kernel)
         search = self.conv_search(search)
+        # print('kernel.size()',kernel.size())
+        # print('search.size()',search.size())
         feature = xcorr_depthwise(search, kernel)
         out = self.head(feature)
+
+        # print('head.size()',out.size())
         return out
 
 

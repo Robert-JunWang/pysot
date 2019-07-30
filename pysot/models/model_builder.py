@@ -8,7 +8,7 @@ from __future__ import unicode_literals
 import torch.nn as nn
 import torch.nn.functional as F
 
-from pysot.core.config import cfg
+# from pysot.core.config import cfg as default_cfg
 from pysot.models.loss import select_cross_entropy_loss, weight_l1_loss
 from pysot.models.backbone import get_backbone
 from pysot.models.head import get_rpn_head, get_mask_head, get_refine_head
@@ -16,8 +16,10 @@ from pysot.models.neck import get_neck
 
 
 class ModelBuilder(nn.Module):
-    def __init__(self):
+    def __init__(self, cfg):
         super(ModelBuilder, self).__init__()
+
+        self.cfg = cfg
 
         # build backbone
         self.backbone = get_backbone(cfg.BACKBONE.TYPE,
@@ -42,26 +44,29 @@ class ModelBuilder(nn.Module):
 
     def template(self, z):
         zf = self.backbone(z)
-        if cfg.MASK.MASK:
+        if self.cfg.MASK.MASK:
             zf = zf[-1]
-        if cfg.ADJUST.ADJUST:
+        if self.cfg.ADJUST.ADJUST:
             zf = self.neck(zf)
         self.zf = zf
 
     def track(self, x):
+
+        # print('x_crop.size()',x.size())
+        # print('zf.size()',self.zf.size())
         xf = self.backbone(x)
-        if cfg.MASK.MASK:
+        if self.cfg.MASK.MASK:
             self.xf = xf[:-1]
             xf = xf[-1]
-        if cfg.ADJUST.ADJUST:
+        if self.cfg.ADJUST.ADJUST:
             xf = self.neck(xf)
         cls, loc = self.rpn_head(self.zf, xf)
-        if cfg.MASK.MASK:
+        if self.cfg.MASK.MASK:
             mask, self.mask_corr_feature = self.mask_head(self.zf, xf)
         return {
                 'cls': cls,
                 'loc': loc,
-                'mask': mask if cfg.MASK.MASK else None
+                'mask': mask if self.cfg.MASK.MASK else None
                }
 
     def mask_refine(self, pos):
@@ -86,11 +91,11 @@ class ModelBuilder(nn.Module):
         # get feature
         zf = self.backbone(template)
         xf = self.backbone(search)
-        if cfg.MASK.MASK:
+        if self.cfg.MASK.MASK:
             zf = zf[-1]
             self.xf_refine = xf[:-1]
             xf = xf[-1]
-        if cfg.ADJUST.ADJUST:
+        if self.cfg.ADJUST.ADJUST:
             zf = self.neck(zf)
             xf = self.neck(xf)
         cls, loc = self.rpn_head(zf, xf)
@@ -101,15 +106,15 @@ class ModelBuilder(nn.Module):
         loc_loss = weight_l1_loss(loc, label_loc, label_loc_weight)
 
         outputs = {}
-        outputs['total_loss'] = cfg.TRAIN.CLS_WEIGHT * cls_loss + \
-            cfg.TRAIN.LOC_WEIGHT * loc_loss
+        outputs['total_loss'] = self.cfg.TRAIN.CLS_WEIGHT * cls_loss + \
+            self.cfg.TRAIN.LOC_WEIGHT * loc_loss
         outputs['cls_loss'] = cls_loss
         outputs['loc_loss'] = loc_loss
 
-        if cfg.MASK.MASK:
+        if self.cfg.MASK.MASK:
             # TODO
             mask, self.mask_corr_feature = self.mask_head(zf, xf)
             mask_loss = None
-            outputs['total_loss'] += cfg.TRAIN.MASK_WEIGHT * mask_loss
+            outputs['total_loss'] += self.cfg.TRAIN.MASK_WEIGHT * mask_loss
             outputs['mask_loss'] = mask_loss
         return outputs

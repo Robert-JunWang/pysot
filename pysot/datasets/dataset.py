@@ -59,8 +59,10 @@ class SubDataset(object):
 
         self.labels = meta_data
         self.num = len(self.labels)
+        print('self.num',self.num)
         self.num_use = self.num if self.num_use == -1 else self.num_use
         self.videos = list(meta_data.keys())
+        print('self.videos',len(self.videos))
         logger.info("{} loaded".format(self.name))
         self.path_format = '{}.{}.{}.jpg'
         self.pick = self.shuffle()

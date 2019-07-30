@@ -135,7 +135,7 @@ if __name__ == '__main__':
                                             load_img=False)
 
     # create model
-    model = ModelBuilder()
+    model = ModelBuilder(cfg)
 
     # load model
     model = load_pretrain(model, args.snapshot).cuda().eval()

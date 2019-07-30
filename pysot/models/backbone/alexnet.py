@@ -89,3 +89,20 @@ def alexnetlegacy(**kwargs):
 
 def alexnet(**kwargs):
     return AlexNet(**kwargs)
+
+if __name__ == '__main__':
+    model = alexnetlegacy()
+    import torch
+
+    print(model)
+
+    def print_size(self, input, output):
+        print(torch.typename(self).split('.')[-1], ' output size:',output.data.size())
+
+    for layer in model.features:
+        layer.register_forward_hook(print_size)
+
+    # input_var = torch.autograd.Variable(torch.Tensor(1,3,540,960))
+    # input_var = torch.autograd.Variable(torch.Tensor(1,3,1056,1920))
+    input_var = torch.autograd.Variable(torch.Tensor(1,3,121,121))
+    output = model.forward(input_var)

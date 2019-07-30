@@ -7,6 +7,8 @@ from __future__ import unicode_literals
 
 from yacs.config import CfgNode as CN
 
+import copy
+
 __C = CN()
 
 cfg = __C
@@ -161,7 +163,9 @@ __C.DATASET.DET.ANNO = 'training_dataset/det/train.json'
 __C.DATASET.DET.FRAME_RANGE = 1
 __C.DATASET.DET.NUM_USE = -1
 
-__C.DATASET.VIDEOS_PER_EPOCH = 600000
+# __C.DATASET.VIDEOS_PER_EPOCH = 600000
+__C.DATASET.VIDEOS_PER_EPOCH = -1
+
 # ------------------------------------------------------------------------ #
 # Backbone options
 # ------------------------------------------------------------------------ #
@@ -288,3 +292,6 @@ __C.TRACK.MASK_THERSHOLD = 0.30
 
 # Mask output size
 __C.TRACK.MASK_OUTPUT_SIZE = 127
+
+
+alex_cfg = copy.deepcopy(cfg)

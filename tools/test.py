@@ -44,7 +44,7 @@ def main():
     dataset_root = os.path.join(cur_dir, '../testing_dataset', args.dataset)
 
     # create model
-    model = ModelBuilder()
+    model = ModelBuilder(cfg)
 
     # load model
     model = load_pretrain(model, args.snapshot).cuda().eval()
