@@ -1,0 +1,19 @@
+alexnet 50 epochs:
+
+[2019-07-22 06:32:58,771-rk0-train.py#191] start training backbone.
+[2019-07-22 14:59:25,869-rk0-train.py#250] Epoch: [20][0/25000] lr: 0.000386
+        batch_time: 0.092676 (0.118550) data_time: 0.027532 (0.045982)
+        cls_loss: 0.010789 (0.019107)   loc_loss: 0.144017 (0.157686)
+        total_loss: 0.183610 (0.208328)
+[2019-07-22 14:59:25,869-rk0-log_helper.py#105] Progress: 500000 / 1250000 [40%], Speed: 0.119 s/iter, ETA 1:00:41 (D:H:M)
+[2019-07-23 16:51:55,981-rk0-log_helper.py#105] Progress: 1249980 / 1250000 [99%], Speed: 0.118 s/iter, ETA 0:00:00 (D:H:M)
+
+resnet50 20 epochs:
+
+[2019-07-24 17:03:58,871-rk0-train.py#259] init done
+[2019-07-24 17:04:36,822-rk0-log_helper.py#105] Progress: 20 / 187500 [0%], Speed: 1.640 s/iter, ETA 3:13:23 (D:H:M)
+[2019-07-25 13:27:45,272-rk0-log_helper.py#105] Progress: 93740 / 187500 [49%], Speed: 0.788 s/iter, ETA 0:20:31 (D:H:M)
+
+[2019-07-25 13:27:53,299-rk0-train.py#191] start training backbone.
+[2019-07-25 13:31:51,863-rk0-log_helper.py#105] Progress: 93860 / 187500 [50%], Speed: 2.162 s/iter, ETA 2:08:13 (D:H:M)
+[2019-07-27 21:52:16,994-rk0-log_helper.py#105] Progress: 187480 / 187500 [99%], Speed: 2.164 s/iter, ETA 0:00:00 (D:H:M)

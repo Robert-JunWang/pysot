@@ -104,5 +104,5 @@ if __name__ == '__main__':
 
     # input_var = torch.autograd.Variable(torch.Tensor(1,3,540,960))
     # input_var = torch.autograd.Variable(torch.Tensor(1,3,1056,1920))
-    input_var = torch.autograd.Variable(torch.Tensor(1,3,121,121))
+    input_var = torch.autograd.Variable(torch.Tensor(1,3,287,287))
     output = model.forward(input_var)

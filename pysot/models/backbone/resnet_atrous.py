@@ -225,19 +225,22 @@ def resnet50(**kwargs):
 
 
 if __name__ == '__main__':
-    kwargs={'used_layers': [2, 3, 4]}
-    net = resnet50(**kwargs)
+    # kwargs={'used_layers': [2, 3, 4]}
+    kwargs={'used_layers': [2]}
+    # net = resnet50(**kwargs)
+    net = resnet18(**kwargs)
     print(net)
     net = net.cuda()
 
-    # def print_size(self, input, output):
-    #     print(torch.typename(self).split('.')[-1], ' output size:',output.data.size())
+    def print_size(self, input, output):
+        print(torch.typename(self).split('.')[-1], ' output size:',output.data.size())
 
-    # for layer in net.features:
-    #     layer.register_forward_hook(print_size)
+    for layer in [net.conv1, net.layer1, net.layer2]:
+        layer.register_forward_hook(print_size)
 
 
-    var = torch.FloatTensor(1, 3, 127, 127).cuda()
+    # var = torch.FloatTensor(1, 3, 127, 127).cuda()
+    var = torch.FloatTensor(1, 3, 255, 255).cuda()
 
     # var = Variable(var)
     # net(var)
