@@ -39,7 +39,7 @@ TRACK:
     CONTEXT_AMOUNT: 0.5
 
 TRAIN:
-    EPOCH: 50
+    EPOCH: 30
     START_EPOCH: 0
     # BATCH_SIZE: 128
     BATCH_SIZE: 8
@@ -67,8 +67,8 @@ DATASET:
     NAMES:
     - 'VID'
     - 'YOUTUBEBB'
-    # - 'COCO'
-    # - 'DET'
+    #- 'COCO'
+    #- 'DET'
 
     TEMPLATE:
         SHIFT: 4
